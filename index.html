@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barria Juan Cruz - Portafolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+* {margin:0; padding:0; box-sizing:border-box;}
+body {font-family:'Roboto', sans-serif; background-color:#f9fafb; color:#333; line-height:1.6;}
+a {text-decoration:none; color:inherit;}
+.container {width:90%; max-width:1200px; margin:auto; padding:2rem 0; position: relative;}
+.lang-toggle {position: fixed; top: 1rem; right: 2rem; background: linear-gradient(135deg,#0f172a,#1e293b); color:#fff; border:none; padding:0.5rem 1rem; border-radius:1rem; cursor:pointer; font-weight:bold; z-index:1000; transition: background-color 0.3s, transform 0.2s;}
+.lang-toggle:hover {transform:scale(1.05);}
+header {background: linear-gradient(135deg,#0f172a,#1e293b); background-attachment: fixed; background-size: cover; color: #fff; padding: 4rem 0; text-align: center; transition: all 0.4s ease;}
+header h1 {font-size:3rem; margin-bottom:0.5rem;}
+header p {font-size:1.2rem; color:#94a3b8; transition: all 0.4s ease;}
+header.scrolled {box-shadow:0 10px 30px rgba(0,0,0,0.2); transform:translateY(-5px);}
+.services {display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:2rem; margin-top:3rem; perspective:1000px;}
+.service-card {background:#fff; border-radius:1rem; padding:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.08); text-align:center; transition: transform 0.3s ease, box-shadow 0.3s ease; opacity:0; transform:translateY(20px); transform-style: preserve-3d;}
+.service-card h3 {margin-bottom:1rem; color:#0f172a; display:flex; justify-content:center; align-items:center; gap:0.5rem; transition: all 0.4s ease;}
+.service-card p {color:#475569; margin-bottom:1rem; transition: all 0.4s ease;}
+.service-card button {background: linear-gradient(135deg,#0f172a,#1e293b); color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 1rem; cursor: pointer; font-weight: bold; transition: background-color 0.3s, transform 0.2s;}
+.service-card button:hover {transform:scale(1.05);}
+.service-card button::after {content:' \25BC'; display:inline-block; margin-left:0.5rem; transition: transform 0.3s ease;}
+.service-card button.open::after {transform: rotate(180deg);}
+.details {max-height:0; overflow:hidden; transition:max-height 0.5s ease, padding 0.5s ease; text-align:left; color:#334155; margin-top:0.5rem;}
+.details.open {padding-top:1rem; max-height:500px;}
+.details ul {list-style: disc; padding-left:1.2rem; transition: all 0.4s ease;}
+.details ul li {opacity:0; transform:translateY(10px); transition: all 0.4s ease;}
+.details.open ul li {opacity:1; transform:translateY(0);}
+.details.open ul li:nth-child(1){transition-delay:0.1s;}
+.details.open ul li:nth-child(2){transition-delay:0.2s;}
+.details.open ul li:nth-child(3){transition-delay:0.3s;}
+.details.open ul li:nth-child(4){transition-delay:0.4s;}
+@keyframes fadeUp {0% {opacity:0; transform: translateY(20px);} 100% {opacity:1; transform: translateY(0);}}
+.service-card:nth-child(1){animation: fadeUp 0.6s ease forwards; animation-delay:0.1s;}
+.service-card:nth-child(2){animation: fadeUp 0.6s ease forwards; animation-delay:0.2s;}
+.service-card:nth-child(3){animation: fadeUp 0.6s ease forwards; animation-delay:0.3s;}
+.service-card:nth-child(4){animation: fadeUp 0.6s ease forwards; animation-delay:0.4s;}
+.service-card:hover {transform: translateY(-12px) scale(1.03); box-shadow:0 20px 50px rgba(0,0,0,0.2);}
+.about {display:flex; flex-wrap:wrap; gap:2rem; align-items:center; margin:5rem 0; background-color:#e2e8f0; padding:3rem; border-radius:1rem; opacity:0; transform:translateY(30px); transition: all 0.6s ease;}
+.about.visible {opacity:1; transform:translateY(0);}
+.about img {width:300px; border-radius:1rem; box-shadow:0 8px 20px rgba(0,0,0,0.08);}
+.about-text {flex:1;}
+.about-text h2 {font-size:2rem; margin-bottom:1rem; color:#0f172a; transition: all 0.4s ease;}
+.about-text p {font-size:1rem; color:#334155; transition: all 0.4s ease;}
+.cta {text-align:center; margin:4rem 0;}
+.cta a {background: linear-gradient(135deg,#0f172a,#1e293b); color:#fff; padding:1rem 2rem; border-radius:2rem; font-weight:bold; font-size:1.1rem; transition: all 0.3s; margin: 0 0.5rem;}
+.cta a:hover {transform:scale(1.05);}
+.contact-float {position:fixed; bottom:2rem; right:2rem; background: linear-gradient(135deg,#0f172a,#1e293b); color:#fff; padding:1rem 1.2rem; border-radius:50px; font-weight:bold; box-shadow:0 8px 20px rgba(0,0,0,0.15); transition: transform 0.2s, background-color 0.3s; z-index:1000; display:flex; align-items:center; gap:0.5rem;}
+.contact-float:hover {transform:scale(1.05);}
+footer {text-align:center; padding:2rem 0; color:#94a3b8; font-size:0.9rem;}
+footer a {color:#0f172a; margin:0 0.5rem;}
+@media(max-width:768px){.about {flex-direction:column; text-align:center;}.about img {width:100%;}}
+</style>
+</head>
+<body>
+
+<button class="lang-toggle" onclick="toggleLang()">EN/ES</button>
+
+<header>
+  <div class="container">
+    <h1 id="header-name">Barria Juan Cruz</h1>
+    <p id="header-desc">Desarrollador | Especialista en Automatización, Chatbots e Inteligencia Artificial</p>
+  </div>
+</header>
+
+<section class="container fade-section" style="background: linear-gradient(180deg,#f0f4f8,#e2e8f0); border-radius:1rem;">
+  <h2 id="services-title" style="text-align:center; margin-bottom:2rem; color:#0f172a;">Servicios</h2>
+  <div class="services">
+    <div class="service-card">
+      <h3><i class="fa-solid fa-robot"></i> <span class="service-title">Automatización de Procesos</span></h3>
+      <p class="service-desc">Optimizo tareas repetitivas para ahorrar tiempo y recursos.</p>
+      <button>Ver más</button>
+      <div class="details"><ul></ul></div>
+    </div>
+    <div class="service-card">
+      <h3><i class="fa-solid fa-comments"></i> <span class="service-title">Chatbots Inteligentes</span></h3>
+      <p class="service-desc">Desarrollo chatbots personalizados para atención al cliente.</p>
+      <button>Ver más</button>
+      <div class="details"><ul></ul></div>
+    </div>
+    <div class="service-card">
+      <h3><i class="fa-solid fa-chart-line"></i> <span class="service-title">Análisis Predictivo</span></h3>
+      <p class="service-desc">Implemento modelos de IA para anticipar tendencias.</p>
+      <button>Ver más</button>
+      <div class="details"><ul></ul></div>
+    </div>
+    <div class="service-card">
+      <h3><i class="fa-solid fa-pen-nib"></i> <span class="service-title">Generación de Contenido</span></h3>
+      <p class="service-desc">Creo sistemas automáticos para generar texto, imágenes y datos.</p>
+      <button>Ver más</button>
+      <div class="details"><ul></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="container about fade-section" style="background: linear-gradient(180deg,#f0f4f8,#e2e8f0); border-radius:1rem;">
+  <img src="https://via.placeholder.com/300x300.png?text=Foto+Perfil" alt="Juan Cruz Barria">
+  <div class="about-text">
+    <h2 id="about-title">Sobre mí</h2>
+    <p id="about-desc">Soy Barria Juan Cruz, desarrollador apasionado por la programación y la Inteligencia Artificial. Me especializo en crear soluciones prácticas que permiten a empresas y profesionales automatizar procesos, mejorar la interacción con clientes y tomar decisiones basadas en datos. Mi objetivo es transformar ideas en herramientas funcionales y escalables.</p>
+  </div>
+</section>
+
+<div class="container cta fade-section">
+  <a href="mailto:barriajuancruz3@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i> Contactarme</a>
+  <a href="https://www.linkedin.com/in/juan-cruz-barria-122076363/" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+</div>
+
+<a href="mailto:barriajuancruz3@gmail.com" target="_blank" class="contact-float"><i class="fa-solid fa-envelope"></i> Contacto</a>
+
+<footer>
+  &copy; 2025 Barria Juan Cruz |
+  <a href="mailto:barriajuancruz3@gmail.com">barriajuancruz3@gmail.com</a> |
+  <a href="https://www.linkedin.com/in/juan-cruz-barria-122076363/" target="_blank">LinkedIn</a>
+</footer>
+
+<script>
+// ===== JavaScript completo con efecto 3D y botones funcionales =====
+let currentLang = 'es';
+const serviceCards = document.querySelectorAll('.service-card');
+
+const translations = {
+  en: {
+    headerDesc: "Developer | Specialist in Automation, Chatbots, and Artificial Intelligence",
+    servicesTitle: "Services",
+    serviceTitles: ["Process Automation","Intelligent Chatbots","Predictive Analytics","Content Generation"],
+    serviceDescs: [
+      "I optimize repetitive tasks to save time and resources.",
+      "I develop customized chatbots for customer service.",
+      "I implement AI models to anticipate trends.",
+      "I create automated systems to generate text, images, and data."
+    ],
+    serviceDetails: [
+      ["Automatic scripts for repetitive tasks.","API and external tool integration.","Automated reporting and data analysis.","Workflow optimization."],
+      ["Integration with WhatsApp, Telegram, and web.","Intelligent AI chatbots.","Automation of frequent queries.","Conversation analysis for continuous improvement."],
+      ["Prediction models for sales and marketing.","Historical data analysis for decision-making.","Interactive trend visualization.","Resource optimization based on predictions."],
+      ["Automatic generation of articles and posts.","Creation of images and graphics with AI.","Automation of newsletters and social media content.","Scalable systems for mass content production."]
+    ],
+    aboutTitle: "About me",
+    aboutDesc: "I am Barria Juan Cruz, a developer passionate about programming and Artificial Intelligence. I specialize in creating practical solutions that allow companies and professionals to automate processes, improve customer interaction, and make data-driven decisions. My goal is to transform ideas into functional and scalable tools.",
+    more: "See more",
+    less: "See less"
+  },
+  es: {
+    headerDesc: "Desarrollador | Especialista en Automatización, Chatbots e Inteligencia Artificial",
+    servicesTitle: "Servicios",
+    serviceTitles: ["Automatización de Procesos","Chatbots Inteligentes","Análisis Predictivo","Generación de Contenido"],
+    serviceDescs: [
+      "Optimizo tareas repetitivas para ahorrar tiempo y recursos.",
+      "Desarrollo chatbots personalizados para atención al cliente.",
+      "Implemento modelos de IA para anticipar tendencias.",
+      "Creo sistemas automáticos para generar texto, imágenes y datos."
+    ],
+    serviceDetails: [
+      ["Scripts automáticos para tareas repetitivas.","Integración de APIs y herramientas externas.","Automatización de reportes y análisis de datos.","Optimización de flujos de trabajo internos."],
+      ["Integración con WhatsApp, Telegram y web.","Chatbots con respuestas inteligentes usando IA.","Automatización de consultas frecuentes.","Análisis de conversaciones para mejoras continuas."],
+      ["Modelos de predicción para ventas y marketing.","Análisis de datos históricos para tomar decisiones.","Visualización de tendencias y reportes interactivos.","Optimización de recursos basada en predicciones."],
+      ["Generación automática de artículos y posts.","Creación de imágenes y gráficos mediante IA.","Automatización de newsletters y contenido para redes.","Sistemas escalables para producción de contenido masivo."]
+    ],
+    aboutTitle: "Sobre mí",
+    aboutDesc: "Soy Barria Juan Cruz, desarrollador apasionado por la programación y la Inteligencia Artificial. Me especializo en crear soluciones prácticas que permiten a empresas y profesionales automatizar procesos, mejorar la interacción con clientes y tomar decisiones basadas en datos. Mi objetivo es transformar ideas en herramientas funcionales y escalables.",
+    more: "Ver más",
+    less: "Ver menos"
+  }
+};
+
+const cardStates = Array.from(serviceCards).map(() => ({ open: false, lang: currentLang }));
+
+function toggleDetails(index) {
+  const card = serviceCards[index];
+  const details = card.querySelector('.details');
+  cardStates[index].open = !cardStates[index].open;
+  details.classList.toggle('open');
+  const cardLang = cardStates[index].lang;
+  const btn = card.querySelector('button');
+  btn.textContent = cardStates[index].open ? translations[cardLang].less : translations[cardLang].more;
+  const list = details.querySelector('ul');
+  list.innerHTML = '';
+  if(cardStates[index].open){
+    translations[cardLang].serviceDetails[index].forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      list.appendChild(li);
+    });
+  }
+}
+
+serviceCards.forEach((card,i)=>{
+  card.querySelector('button').addEventListener('click',()=>toggleDetails(i));
+});
+
+function toggleLang(){
+  currentLang = currentLang==='es'?'en':'es';
+  document.getElementById('header-desc').textContent = translations[currentLang].headerDesc;
+  document.getElementById('services-title').textContent = translations[currentLang].servicesTitle;
+  document.getElementById('about-title').textContent = translations[currentLang].aboutTitle;
+  document.getElementById('about-desc').textContent = translations[currentLang].aboutDesc;
+  serviceCards.forEach((card,i)=>{
+    cardStates[i].lang = currentLang;
+    card.querySelector('.service-title').textContent = translations[currentLang].serviceTitles[i];
+    card.querySelector('.service-desc').textContent = translations[currentLang].serviceDescs[i];
+    const btn = card.querySelector('button');
+    const open = cardStates[i].open;
+    btn.textContent = open ? translations[currentLang].less : translations[currentLang].more;
+    if(open){
+      const list = card.querySelector('.details ul');
+      list.innerHTML = '';
+      translations[currentLang].serviceDetails[i].forEach(item=>{
+        const li = document.createElement('li');
+        li.textContent = item;
+        list.appendChild(li);
+      });
+    }
+  });
+}
+
+// Scroll reveal
+const fadeSections = document.querySelectorAll('.fade-section');
+const observer = new IntersectionObserver(entries => { entries.forEach(entry => { if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); }, { threshold:0.2 });
+fadeSections.forEach(sec=>observer.observe(sec));
+
+// Parallax header
+window.addEventListener('scroll', ()=>{
+  const scrollY = window.scrollY;
+  const header = document.querySelector('header');
+  header.style.backgroundPosition = `center ${scrollY*0.3}px`;
+  document.querySelectorAll('.fade-section').forEach(sec=>sec.style.backgroundPosition=`center ${scrollY*0.1}px`);
+  if(scrollY>20) header.classList.add('scrolled'); else header.classList.remove('scrolled');
+});
+
+// Efecto 3D
+serviceCards.forEach(card=>{
+  card.addEventListener('mousemove',(e)=>{
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width/2;
+    const centerY = rect.height/2;
+    const rotateX = ((y-centerY)/centerY)*10;
+    const rotateY = ((x-centerX)/centerX)*10;
+    card.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+  });
+  card.addEventListener('mouseleave',()=>{ card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)'; });
+});
+</script>
+</body>
+</html>
